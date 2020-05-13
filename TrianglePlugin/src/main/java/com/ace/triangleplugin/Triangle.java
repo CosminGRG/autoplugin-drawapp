@@ -8,6 +8,7 @@ package com.ace.triangleplugin;
 import com.ace.autoplugin.interfaces.*;
 import com.ace.menu.ConsoleController;
 import java.awt.Point;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 /**
  *
@@ -39,11 +40,18 @@ public class Triangle implements IShape{
         
         for (int i = 0; i < points.length; i++)
         {
-            System.out.println("Point: " + i);
-            System.out.println("X: ");
-            points[i].x = input.nextInt();
-            System.out.println("Y: ");
-            points[i].y = input.nextInt();
+            try
+            {
+                System.out.println("Point: " + i);
+                System.out.println("X: ");
+                points[i].x = input.nextInt();
+                System.out.println("Y: ");
+                points[i].y = input.nextInt();
+            }
+            catch (InputMismatchException error)
+            {
+            System.out.println("Input Mismatch.");
+            }
         }
 
         ConsoleController.Clear();
@@ -62,7 +70,7 @@ public class Triangle implements IShape{
         int i = 0;
         for (Point point : points)
         {
-            info += "- Point " + i + ": X =" + point.x + " Y = " + point.y;
+            info += " \n Point " + i + ": X =" + point.x + " Y = " + point.y;
             i++;
         }
         return info;

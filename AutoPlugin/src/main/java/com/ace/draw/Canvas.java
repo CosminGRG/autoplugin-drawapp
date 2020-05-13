@@ -48,11 +48,11 @@ public class Canvas {
                 return false;
         }
         int index = 0;
+        System.out.println("Index : Shape Type");
         for (IShape item : shapeList)
         {
-                System.out.println("Index : Shape Type");
-                System.out.println(index + " : " + item.getInfo());
-                index++;
+            System.out.println(index + " : " + item.getInfo());
+            index++;
         }
         System.out.println("");
         return true;

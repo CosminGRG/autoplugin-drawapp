@@ -8,6 +8,8 @@ package com.ace.rectangle;
 import com.ace.autoplugin.interfaces.IShape;
 import java.util.Scanner;
 import com.ace.menu.ConsoleController;
+import java.awt.Point;
+import java.util.InputMismatchException;
 /**
  *
  * @author ykscr
@@ -61,20 +63,27 @@ public class Rectangle implements IShape {
         Scanner input = new Scanner(System.in);
 
         System.out.println("Length and Width:");
-        int lenght = input.nextInt();
-        int width = input.nextInt();
-
-        this.length = lenght;
+        try 
+        {
+            int length = input.nextInt();
+            int width = input.nextInt();
+        }
+        catch (InputMismatchException error)
+        {
+            System.out.println("Input Mismatch.");
+        }
+        this.length = length;
         this.width = width;
 
         ConsoleController.Clear();
         System.out.println("Shape added - Rectangle");
-        System.out.println("Length: " + lenght + "; " + "Width: " + width + ";");
+        System.out.println("Length: " + length + "; " + "Width: " + width + ";");
         System.out.println("");
     }
 
-    @Override
-    public String getName() {
-        return name;
+    public String getInfo() {
+        String info = name;
+        info += " Width: " + this.width + " Length: " + this.length;
+        return info;
     }
 }

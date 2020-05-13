@@ -8,6 +8,7 @@ package com.ace.circleplugin;
 import com.ace.autoplugin.interfaces.IShape;
 import java.util.Scanner;
 import com.ace.menu.ConsoleController;
+import java.util.InputMismatchException;
 
 /**
  *
@@ -64,7 +65,14 @@ public class Circle implements IShape {
         Scanner input = new Scanner(System.in);
 
         System.out.println("Radius:");
-        double radius = input.nextDouble();
+        try
+        {
+            double radius = input.nextDouble();
+        }
+        catch (InputMismatchException error)
+        {
+            System.out.println("Input Mismatch.");
+        }
 
         this.radius = radius;
 
@@ -75,7 +83,10 @@ public class Circle implements IShape {
     }
 
     @Override
-    public String getName() {
-        return name;
+    public String getInfo() {
+        String info = name;
+        info += " Radius: " + this.radius;
+        
+        return info;
     }
 }
