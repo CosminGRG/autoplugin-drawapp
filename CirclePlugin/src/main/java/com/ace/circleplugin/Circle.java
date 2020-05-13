@@ -15,8 +15,8 @@ import java.util.InputMismatchException;
  * @author ykscr
  */
 public class Circle implements IShape {
-
-    public static String name = "Circle";
+    private static String name = "Circle";
+    
     double radius;
     /*
     Point center;
@@ -64,16 +64,10 @@ public class Circle implements IShape {
         @SuppressWarnings("resource")
         Scanner input = new Scanner(System.in);
 
-        System.out.println("Radius:");
-        try
-        {
-            double radius = input.nextDouble();
-        }
-        catch (InputMismatchException error)
-        {
-            System.out.println("Input Mismatch.");
-        }
-
+        System.out.println("Radius: ");
+        
+        double radius = input.nextDouble();
+        
         this.radius = radius;
 
         ConsoleController.Clear();

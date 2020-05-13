@@ -8,6 +8,7 @@ package com.ace.draw;
 import com.ace.autoplugin.interfaces.IShape;
 import com.ace.menu.ConsoleController;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 
 /**
  *
@@ -19,8 +20,18 @@ public class Canvas {
 	
     public void AddShape()
     {
-        shape.read();
-        shapeList.add(shape);
+        
+        try
+        {
+            shape.read();
+            shapeList.add(shape);
+
+        }
+        catch(InputMismatchException error)
+        {
+            System.out.println("Input Mismatch.");
+        }
+
     }
 	
     public void DrawShape()

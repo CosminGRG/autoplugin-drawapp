@@ -15,7 +15,7 @@ import java.util.Scanner;
  * @author ykscr
  */
 public class Triangle implements IShape{
-    public static String name = "Triangle";
+    private static String name = "Triangle";
     
     Point[] points = {
         new Point(),
@@ -25,9 +25,11 @@ public class Triangle implements IShape{
     
     @Override
     public void draw() {
+        System.out.println(name + " with coordinates:");
+        int i = 0;
         for (Point point : points)
         {
-            point.toString();
+            System.out.println("Point" + i++ + " (" + point.x + ", " + point.y + "); ");
         }
     }
     
@@ -40,18 +42,11 @@ public class Triangle implements IShape{
         
         for (int i = 0; i < points.length; i++)
         {
-            try
-            {
-                System.out.println("Point: " + i);
-                System.out.println("X: ");
-                points[i].x = input.nextInt();
-                System.out.println("Y: ");
-                points[i].y = input.nextInt();
-            }
-            catch (InputMismatchException error)
-            {
-            System.out.println("Input Mismatch.");
-            }
+            System.out.println("Point: " + i);
+            System.out.println("X: ");
+            points[i].x = input.nextInt();
+            System.out.println("Y: ");
+            points[i].y = input.nextInt();     
         }
 
         ConsoleController.Clear();

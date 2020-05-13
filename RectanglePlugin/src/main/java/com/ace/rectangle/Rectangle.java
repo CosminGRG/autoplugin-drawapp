@@ -26,7 +26,8 @@ public class Rectangle implements IShape {
         Point leftDown = new Point(rightX, rightY);
     }
     */
-    public static String name = "Rectangle";
+    private static String name = "Rectangle";
+    
     int width;
     int length;
 
@@ -34,7 +35,7 @@ public class Rectangle implements IShape {
     public void draw() {
         String symbol = "*";
 
-        System.out.println("Rectangle with Length " + length + " and width " + width + ";");
+        System.out.println("Rectangle with Length " + length + " and width " + width + "; ");
         for (int i = 0; i < this.length; i++)
         {
             System.out.println("");
@@ -63,15 +64,10 @@ public class Rectangle implements IShape {
         Scanner input = new Scanner(System.in);
 
         System.out.println("Length and Width:");
-        try 
-        {
-            int length = input.nextInt();
-            int width = input.nextInt();
-        }
-        catch (InputMismatchException error)
-        {
-            System.out.println("Input Mismatch.");
-        }
+
+        int length = input.nextInt();
+        int width = input.nextInt();
+        
         this.length = length;
         this.width = width;
 
