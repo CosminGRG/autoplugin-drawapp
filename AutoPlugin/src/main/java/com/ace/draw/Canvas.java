@@ -51,7 +51,7 @@ public class Canvas {
         for (IShape item : shapeList)
         {
                 System.out.println("Index : Shape Type");
-                System.out.println(index + " : " + item.getName());
+                System.out.println(index + " : " + item.getInfo());
                 index++;
         }
         System.out.println("");

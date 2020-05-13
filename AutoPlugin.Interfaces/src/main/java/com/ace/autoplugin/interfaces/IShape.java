@@ -12,5 +12,5 @@ package com.ace.autoplugin.interfaces;
 public interface IShape {
 	void read();
 	void draw();
-	String getName();
+	String getInfo();
 }
