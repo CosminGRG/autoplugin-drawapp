@@ -79,7 +79,7 @@ public class Rectangle implements IShape {
 
     public String getInfo() {
         String info = name;
-        info += " Width: " + this.width + " Length: " + this.length;
+        info += " - Width: " + this.width + " Length: " + this.length;
         return info;
     }
 }

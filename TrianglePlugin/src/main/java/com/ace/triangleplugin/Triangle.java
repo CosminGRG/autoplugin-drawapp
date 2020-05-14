@@ -51,10 +51,11 @@ public class Triangle implements IShape{
 
         ConsoleController.Clear();
         System.out.println("Shape added - " + name);
-        System.out.println("Triangle points coordinates: ");
+        System.out.println(name + " points coordinates: ");
+        int i = 0;
         for (Point point : points)
         {
-            point.toString();
+            System.out.println("Point" + i++ + " (" + point.x + ", " + point.y + "); ");
         }
         System.out.println("");
     }

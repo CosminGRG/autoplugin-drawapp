@@ -20,7 +20,6 @@ public class Canvas {
 	
     public void AddShape()
     {
-        
         try
         {
             shape.read();

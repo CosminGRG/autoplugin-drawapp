@@ -37,7 +37,7 @@ public class Square implements IShape {
         
         ConsoleController.Clear();
         System.out.println("Shape added " + name);
-        System.out.println("");
+        System.out.println("Side length: " + this.sideLength);
         System.out.println("");
     }
     
@@ -48,7 +48,7 @@ public class Square implements IShape {
 
     public String getInfo() {
         String info = name;
-        info += " Side length: " + this.sideLength;
+        info += " - Side length: " + this.sideLength;
         return info;
     }
 }

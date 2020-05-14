@@ -79,7 +79,7 @@ public class Circle implements IShape {
     @Override
     public String getInfo() {
         String info = name;
-        info += " Radius: " + this.radius;
+        info += " - Radius: " + this.radius;
         
         return info;
     }
