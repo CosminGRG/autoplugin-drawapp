@@ -6,6 +6,7 @@
 package com.ace.rectangle;
 
 import com.ace.autoplugin.interfaces.IShape;
+import com.ace.draw.Canvas;
 import java.util.Scanner;
 import com.ace.menu.ConsoleController;
 import java.awt.Point;
@@ -15,18 +16,14 @@ import java.util.InputMismatchException;
  * @author ykscr
  */
 public class Rectangle implements IShape {
-
-    /*
-    Point leftUp;
-    Point rightDown;
-
-    public Rectangle(double leftX, double leftY, double rightX, double rightY)
-    {
-        Point leftUp = new Point(leftX, leftY);
-        Point leftDown = new Point(rightX, rightY);
-    }
-    */
     private static String name = "Rectangle";
+    
+    Canvas canvasObserver = null;
+    
+    Point[] points = {
+        new Point(),
+        new Point()
+    };
     
     int width;
     int length;
@@ -35,17 +32,17 @@ public class Rectangle implements IShape {
     public void draw() {
         String symbol = "*";
 
-        System.out.println("Rectangle with Length " + length + " and width " + width + "; ");
-        for (int i = 0; i < this.length; i++)
+        System.out.println("Rectangle with Length " + length + " and Width " + width + "; ");
+        for (int i = 0; i < this.width; i++)
         {
             System.out.println("");
-            for (int j = 0; j < this.width; j++)
+            for (int j = 0; j < this.length; j++)
             {
-                if (i == 0 || i == this.length - 1)
+                if (i == 0 || i == this.width - 1)
                 {
                         System.out.print(symbol);
                 }
-                else if (j == 0 || j == this.width - 1)
+                else if (j == 0 || j == this.length - 1)
                 {
                         System.out.print(symbol);
                 }
@@ -62,24 +59,63 @@ public class Rectangle implements IShape {
     public void read() {
         @SuppressWarnings("resource")
         Scanner input = new Scanner(System.in);
-
-        System.out.println("Length and Width:");
-
-        int length = input.nextInt();
-        int width = input.nextInt();
+        
+        for (int i = 0; i < points.length; i++)
+        {
+            System.out.println("Point: " + i);
+            System.out.println("X: ");
+            points[i].x = input.nextInt();
+            System.out.println("Y: ");
+            points[i].y = input.nextInt();     
+        }
+        
+        int length = Math.abs(points[0].x - points[1].x);
+        int width = Math.abs(points[0].y - points[1].y);
         
         this.length = length;
         this.width = width;
+        
 
         ConsoleController.Clear();
         System.out.println("Shape added - Rectangle");
+        int i = 0;
+        for (Point point : points)
+        {
+            System.out.println("Point " + i++ + ": (" + point.x + ", " + point.y + "); ");
+        }
         System.out.println("Length: " + length + "; " + "Width: " + width + ";");
         System.out.println("");
+        
+        notifyObserver();
     }
 
     public String getInfo() {
         String info = name;
+        int i = 0;
         info += " - Width: " + this.width + " Length: " + this.length;
+        for (Point point : points)
+        {
+            info += " \n Point " + i + ": X = " + point.x + " Y = " + point.y;
+            i++;
+        }    
         return info;
+    }
+    
+    @Override
+    public Point[] getCoords()
+    {
+        return points;
+    }
+    
+    @Override
+    public void setObserver(Canvas observer)
+    {
+        canvasObserver = observer;
+    }
+    
+    @Override
+    public void notifyObserver()
+    {
+        canvasObserver.UpdateCanvas(this);
     }
 }

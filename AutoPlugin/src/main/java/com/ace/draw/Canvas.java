@@ -7,6 +7,7 @@ package com.ace.draw;
 
 import com.ace.autoplugin.interfaces.IShape;
 import com.ace.menu.ConsoleController;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 
@@ -15,32 +16,29 @@ import java.util.InputMismatchException;
  * @author ykscr
  */
 public class Canvas {
-    private IShape shape;
+    int width;
+    int height;
+    
     private ArrayList<IShape> shapeList = new ArrayList<IShape>();
-	
-    public void AddShape()
+
+    public Canvas(int width, int height)
+    {
+        this.width = width;
+        this.height = height;
+    }
+    
+    public void AddShape(IShape shape)
     {
         try
         {
+            shape.setObserver(this);
             shape.read();
             shapeList.add(shape);
-
         }
         catch(InputMismatchException error)
         {
             System.out.println("Input Mismatch.");
         }
-
-    }
-	
-    public void DrawShape()
-    {
-        shape.draw();
-    }
-	
-    public void setShape(IShape shape)
-    {
-        this.shape = shape;
     }
 	
     public ArrayList<IShape> getShapeList()
@@ -50,6 +48,8 @@ public class Canvas {
 	
     public boolean ViewCanvasAsList()
     {
+        ConsoleController.Clear();
+        System.out.println("Canvas size: " + width + " x " + height);
         if (shapeList.size() == 0)
         {
                 System.out.println("");
@@ -73,15 +73,42 @@ public class Canvas {
         ConsoleController.Clear();
         if (shapeList.size() == 0)
         {
-                System.out.println("");
-                System.out.println("Canvas is empty.");
-                System.out.println("");
+            System.out.println("");
+            System.out.println("Canvas is empty.");
+            System.out.println("");
         }
         for (IShape item : shapeList)
         {
-                item.draw();
+            item.draw();
         }
         System.out.println("");
+    }
+    
+    public void UpdateCanvas(IShape shape)
+    {
+        int padding = 5;
+        Point[] shapeCoords = shape.getCoords();
+        for (Point point : shapeCoords)
+        {
+            if (point.x > this.width)
+            {
+                this.width += point.x + padding;
+                System.out.println("Canvas size updated - Width: " + width);
+            }
+            if (point.y > this.height)
+            {
+                this.height += point.y + padding;
+                System.out.println("Canvas size updated - Height: " + height);
+            }
+        }
+    }
+    
+    public String getSize()
+    {
+        String size = new String();
+        size += width + " x " + height;
+        
+        return size;
     }
 }
 

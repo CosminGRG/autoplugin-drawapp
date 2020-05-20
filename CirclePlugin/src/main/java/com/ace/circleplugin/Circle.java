@@ -5,9 +5,11 @@
  */
 package com.ace.circleplugin;
 
+import com.ace.draw.Canvas;
 import com.ace.autoplugin.interfaces.IShape;
 import java.util.Scanner;
 import com.ace.menu.ConsoleController;
+import java.awt.Point;
 import java.util.InputMismatchException;
 
 /**
@@ -17,17 +19,12 @@ import java.util.InputMismatchException;
 public class Circle implements IShape {
     private static String name = "Circle";
     
+    private Canvas canvasObserver = null;
+    
+    Point[] points = {
+        new Point()
+    };
     double radius;
-    /*
-    Point center;
-
-    public Circle(double centerX, double centerY, double radius)
-    {
-            Point center = new Point(centerX, centerY);
-            this.center = center;
-            this.radius = radius;
-    }
-    */
 
     @Override
     public void draw() 
@@ -52,7 +49,7 @@ public class Circle implements IShape {
                 }
                 else
                 {
-                        System.out.print(" ");
+                    System.out.print(" ");
                 }
             }
         }
@@ -63,24 +60,50 @@ public class Circle implements IShape {
     public void read() {
         @SuppressWarnings("resource")
         Scanner input = new Scanner(System.in);
-
-        System.out.println("Radius: ");
         
+        System.out.println("Center point coordinates: ");
+        Point center = new Point();
+        center.x = input.nextInt();
+        center.y = input.nextInt();
+        
+        System.out.println("Radius: ");
         double radius = input.nextDouble();
         
         this.radius = radius;
+        this.points[0] = center;
 
         ConsoleController.Clear();
         System.out.println("Shape added - Circle");
+        System.out.println("Center point: " + "(" + points[0].x + ", " + points[0].y + ")");
         System.out.println("Radius: " + radius + ";");
         System.out.println("");
+        
+        notifyObserver();
     }
 
     @Override
     public String getInfo() {
         String info = name;
-        info += " - Radius: " + this.radius;
+        info += " - Radius: " + this.radius + " - Center point: " + "(" + points[0].x + ", " + points[0].y + ");";
         
         return info;
+    }
+    
+    @Override
+    public Point[] getCoords()
+    {
+        return points;
+    }
+    
+    @Override
+    public void setObserver(Canvas observer)
+    {
+        canvasObserver = observer;
+    }
+    
+    @Override
+    public void notifyObserver()
+    {
+        canvasObserver.UpdateCanvas(this);
     }
 }

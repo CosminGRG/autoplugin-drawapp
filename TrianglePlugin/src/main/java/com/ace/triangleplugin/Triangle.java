@@ -6,6 +6,7 @@
 package com.ace.triangleplugin;
 
 import com.ace.autoplugin.interfaces.*;
+import com.ace.draw.Canvas;
 import com.ace.menu.ConsoleController;
 import java.awt.Point;
 import java.util.InputMismatchException;
@@ -16,6 +17,8 @@ import java.util.Scanner;
  */
 public class Triangle implements IShape{
     private static String name = "Triangle";
+    
+    Canvas canvasObserver = null;
     
     Point[] points = {
         new Point(),
@@ -55,9 +58,11 @@ public class Triangle implements IShape{
         int i = 0;
         for (Point point : points)
         {
-            System.out.println("Point" + i++ + " (" + point.x + ", " + point.y + "); ");
+            System.out.println("Point " + i++ + ": (" + point.x + ", " + point.y + "); ");
         }
         System.out.println("");
+        
+        notifyObserver();
     }
     
     @Override
@@ -70,5 +75,23 @@ public class Triangle implements IShape{
             i++;
         }
         return info;
+    }
+    
+    @Override
+    public Point[] getCoords()
+    {
+        return points;
+    }
+    
+    @Override
+    public void setObserver(Canvas observer)
+    {
+        canvasObserver = observer;
+    }
+    
+    @Override
+    public void notifyObserver()
+    {
+        canvasObserver.UpdateCanvas(this);
     }
 }

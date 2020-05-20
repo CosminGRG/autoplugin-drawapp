@@ -4,13 +4,18 @@
  * and open the template in the editor.
  */
 package com.ace.autoplugin.interfaces;
+import com.ace.draw.Canvas;
+import java.awt.Point;
 
 /**
  *
  * @author ykscr
  */
 public interface IShape {
-	void read();
-	void draw();
-	String getInfo();
+    void read();
+    void draw();
+    String getInfo();
+    void notifyObserver();
+    void setObserver(Canvas observer);
+    Point[] getCoords();
 }

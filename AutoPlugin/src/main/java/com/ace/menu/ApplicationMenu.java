@@ -42,7 +42,7 @@ public class ApplicationMenu{
         int shortCut = 1;
         var plugins = pluginMan.getPlugins();
      
-        Menu mainMenu = new Menu("Main Menu");
+        Menu mainMenu = new Menu("- Main Menu -");
         Menu addShapeSubMenu = new Menu("Add New Shape");
         mainMenu.AddSubMenu(1, "Add Shape", addShapeSubMenu);
         mainMenu.AddMenuItem(2, "Delete Shape", (parameters) -> {
@@ -64,7 +64,6 @@ public class ApplicationMenu{
                IShape shape = currentPlugin.getShape();
                drawController.Read(shape);
            });
-           //menuItems.add(currentItem);
            
            addShapeSubMenu.AddMenuItem(currentItem);
         }
