@@ -84,10 +84,10 @@ public class Canvas {
         System.out.println("");
     }
     
-    public void UpdateCanvas(IShape shape)
+    public void UpdateCanvas(IShape shape, Point[] coords)
     {
         int padding = 5;
-        Point[] shapeCoords = shape.getCoords();
+        Point[] shapeCoords = coords;
         for (Point point : shapeCoords)
         {
             if (point.x > this.width)

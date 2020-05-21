@@ -102,20 +102,13 @@ public class Rectangle implements IShape {
     }
     
     @Override
-    public Point[] getCoords()
-    {
-        return points;
-    }
-    
-    @Override
     public void setObserver(Canvas observer)
     {
         canvasObserver = observer;
     }
     
-    @Override
-    public void notifyObserver()
+    private void notifyObserver()
     {
-        canvasObserver.UpdateCanvas(this);
+        canvasObserver.UpdateCanvas(this, points);
     }
 }

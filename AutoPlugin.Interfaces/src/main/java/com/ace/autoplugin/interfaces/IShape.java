@@ -15,7 +15,5 @@ public interface IShape {
     void read();
     void draw();
     String getInfo();
-    void notifyObserver();
     void setObserver(Canvas observer);
-    Point[] getCoords();
 }
